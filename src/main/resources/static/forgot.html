@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reset Password</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #1e1e1e;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #2a2a2a;
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #c16eb9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    a {
+      color: #aaa;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Reset Password</h2>
+
+  <input id="email" placeholder="Enter your email">
+  <input id="password" type="password" placeholder="New Password">
+
+  <button onclick="reset()">Reset Password</button>
+
+  <br><br>
+
+  <a href="/auth.html">Back to Login</a>
+</div>
+
+<script>
+function reset() {
+  fetch('/auth/forgot', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value
+    })
+  })
+  .then(res => res.text())
+  .then(data => {
+    alert(data);
+    if (data === "Password reset successful") {
+      window.location.href = "/auth.html";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Compiled
+*.class
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# H2 database files (keep them out of git so the demo starts clean)
+data/
+*.mv.db
+*.trace.db
+*.lock.db

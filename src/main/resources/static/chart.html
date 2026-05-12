@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expense Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="background:#1e1e1e; color:white; text-align:center;">
+
+<h2>Expense Chart</h2>
+
+<input type="date" id="start">
+<input type="date" id="end">
+<button onclick="loadData()">Load</button>
+
+<canvas id="chart" width="400" height="200"></canvas>
+
+<script>
+let chart;
+
+function loadData() {
+  const start = document.getElementById("start").value;
+  const end = document.getElementById("end").value;
+  const email = localStorage.getItem("userEmail");
+
+fetch(`/expenses/filter?email=${email}&start=${start}&end=${end}`)    .then(res => res.json())
+    .then(data => {
+
+      const categories = {};
+      
+      data.forEach(e => {
+        if (!categories[e.category]) {
+          categories[e.category] = 0;
+        }
+        categories[e.category] += e.amount;
+      });
+
+      const labels = Object.keys(categories);
+      const values = Object.values(categories);
+
+      if (chart) chart.destroy();
+
+      const ctx = document.getElementById('chart');
+
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Expenses',
+            data: values
+          }]
+        }
+      });
+    });
+}
+</script>
+
+</body>
+</html>

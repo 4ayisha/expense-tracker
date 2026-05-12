@@ -1,0 +1,14 @@
+# Render Blueprint - https://render.com/docs/blueprint-spec
+# Deploy this Spring Boot app on Render's free tier directly from GitHub.
+services:
+  - type: web
+    name: expense-tracker
+    runtime: docker
+    plan: free
+    # Build the fat JAR with Maven, then run it.
+    # Render injects $PORT — application.properties already reads it.
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: JAVA_OPTS
+        value: "-Xmx400m"

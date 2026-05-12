@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth</title>
+</head>
+<body>
+
+<h2 id="title">Sign Up</h2>
+
+<!-- EMAIL -->
+<input id="email" placeholder="Email"><br><br>
+
+<!-- PASSWORD -->
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<!-- BUTTON -->
+<button onclick="submitForm()">Sign up</button>
+
+<br><br>
+
+<!-- TOGGLE -->
+<a href="#" onclick="toggleMode()">Already have an account? Login</a>
+
+<br><br>
+
+<!-- FORGOT PASSWORD -->
+<a href="/forgot.html">Forgot Password?</a>
+
+<script>
+let isSignup = true;
+
+function toggleMode() {
+  isSignup = !isSignup;
+
+  document.getElementById("title").innerText = isSignup ? "Signup" : "Login";
+  document.querySelector("button").innerText = isSignup ? "Signup" : "Login";
+  document.querySelector("a").innerText = isSignup 
+    ? "Already have an account? Login" 
+    : "Don't have an account? Signup";
+}
+
+function submitForm() {
+  const url = isSignup ? '/auth/signup' : '/auth/login';
+
+  fetch(url, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value
+    })
+  })
+  .then(res => res.text())
+  .then(data => {
+    if (data === "Login successful") {
+      localStorage.setItem("loggedIn", "true");
+      window.location.href = "/";
+    } else {
+      alert(data);
+    }
+  });
+}
+</script>
+
+</body>
+</html>

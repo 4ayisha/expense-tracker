@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auth</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #1e1e1e;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #2a2a2a;
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #c16eb9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    a {
+      color: #aaa;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="title">Login</h2>
+
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="submitForm()">Login</button>
+
+  <br><br>
+
+  <a onclick="toggleMode()">Don't have an account? Sign up</a>
+  <br>
+  <a href="/forgot.html">Forgot Password?</a>
+</div>
+
+<script>
+let isSignup = false;
+
+function toggleMode() {
+  isSignup = !isSignup;
+
+  document.getElementById("title").innerText = isSignup ? "Signup" : "Login";
+  document.querySelector("button").innerText = isSignup ? "Signup" : "Login";
+  document.querySelector("a").innerText = isSignup 
+    ? "Already have an account? Login" 
+    : "Don't have an account? Signup";
+}
+
+function submitForm() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const url = isSignup ? '/auth/signup' : '/auth/login';
+
+  fetch(url, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email, password })
+  })
+  .then(res => res.text())
+  .then(data => {
+    if (data === "Login successful") {
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("userEmail", email); // important for later
+      window.location.href = "/index.html";
+    } else {
+      alert(data);
+    }
+  });
+
+}
+</script>
+
+</body>
+</html>

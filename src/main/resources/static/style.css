@@ -1,0 +1,134 @@
+/* ===== Theme variables ===== */
+:root {
+  --brand: #4f46e5;
+  --brand-dark: #4338ca;
+  --bg: #f5f7fb;
+  --card-radius: 14px;
+}
+
+html,
+body {
+  background-color: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  color: #1f2937;
+}
+
+/* ===== Navbar ===== */
+.app-navbar {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+.app-navbar .navbar-brand {
+  letter-spacing: 0.3px;
+}
+
+/* ===== Cards ===== */
+.card {
+  border-radius: var(--card-radius);
+}
+.stat-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08) !important;
+}
+.chart-wrap {
+  position: relative;
+  height: 110px;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--brand-dark);
+  border-color: var(--brand-dark);
+}
+.btn {
+  transition: transform 0.08s ease, box-shadow 0.15s ease;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ===== Table ===== */
+.expense-table thead th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+.expense-table tbody tr {
+  transition: background-color 0.12s ease;
+}
+.expense-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+.sortable:hover {
+  color: var(--brand);
+}
+.sortable.active {
+  color: var(--brand);
+}
+
+/* ===== Category badges ===== */
+.cat-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.cat-Food { background: #fee2e2; color: #b91c1c; }
+.cat-Transport { background: #dbeafe; color: #1d4ed8; }
+.cat-Bills { background: #fef3c7; color: #92400e; }
+.cat-Entertainment { background: #ede9fe; color: #6d28d9; }
+.cat-Shopping { background: #dcfce7; color: #15803d; }
+.cat-Other { background: #e5e7eb; color: #374151; }
+
+/* ===== Action buttons in table ===== */
+.btn-icon {
+  border: none;
+  background: transparent;
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  color: #6b7280;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-icon:hover {
+  background: #eef2ff;
+  color: var(--brand);
+}
+.btn-icon.danger:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ===== Modal tweaks ===== */
+.modal-content {
+  border-radius: var(--card-radius);
+  border: none;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 576px) {
+  .chart-wrap {
+    height: 140px;
+  }
+  .expense-table td,
+  .expense-table th {
+    white-space: nowrap;
+  }
+}
